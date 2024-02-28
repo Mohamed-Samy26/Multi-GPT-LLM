@@ -10,6 +10,7 @@ vicuna_7b-v1
 minigpt4_7b-v1
 minigpt_llma2-v2
 llama2_7b-v2
+images
 
 # Distribution / packaging
 .Python

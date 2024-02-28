@@ -96,14 +96,14 @@ async def custom_validation_exception_handler(request, exc):
 @app.post("/")
 def upload_img(image: UploadFile = File(None)):
 
-    global sessions
-
-    if image is None: 
+    if image is None or image.size == 0: 
         raise CustomValidationError("Parameter 'image' is required")
 
     contents = image.file.read()
     if contents is None: 
         raise CustomValidationError("Parameter 'image' is required")
+
+    global sessions
 
     session_token = str(uuid.uuid4())
 
@@ -133,7 +133,6 @@ def upload_img(image: UploadFile = File(None)):
 
 @app.get("/")
 def getResponse(prompt: str = Query(None) , session_token: str = Query(None)):
-
 
     if session_token is None:
         raise CustomValidationError("Parameter 'session_token' is required")
